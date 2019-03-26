@@ -11,9 +11,6 @@ pub enum Error {
     /// Invalid ABI
     InvalidABI(String),
 
-    /// Invalid ABI Token
-    InvalidABIToken(ethabi::token::Error),
-
     /// An invalid length
     InvalidLength(usize),
 
@@ -33,20 +30,8 @@ impl From<ethabi::Error> for Error {
     }
 }
 
-impl From<ethabi::Error> for Error {
-    fn from(err: ethabi::Error) -> Self {
-        Error::InvalidABI(format!("Invalid ABI Spec {:?}", err))
-    }
-}
-
-impl From<ethabi::token::Error> for Error {
-    fn from(err: ethabi::token::Error) -> Self {
-        Error::InvalidABIToken(err)
-    }
-}
-
-impl From<ethabi::param_type::Error> for Error {
-    fn from(err: ethabi::param_type::Error) -> Self {
+impl From<ethabi::ErrorKind> for Error {
+    fn from(err: ethabi::ErrorKind) -> Self {
         Error::InvalidABI(format!("Invalid ABI Param {:?}", err))
     }
 }

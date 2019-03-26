@@ -7,7 +7,6 @@ use ethabi::param_type::{ParamType, Reader};
 use ethabi::token::{LenientTokenizer, Token, Tokenizer};
 use ethabi::{encode, Contract, Function};
 use hex;
-use std::fmt;
 
 ///// Contract specification
 //#[derive(Clone, Debug, Deserialize)]
@@ -30,7 +29,7 @@ use std::fmt;
 /// Returns specification of contract function given the function name.
 pub fn get_function(contract: &Contract, name: String) -> Option<Function> {
     match contract.function(&name) {
-        Some(f) => Some(Function::new(f)),
+        Ok(f) => Some(Function::new(f)),
         _ => None,
     }
 }
