@@ -52,7 +52,6 @@ impl fmt::Display for Error {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match *self {
             Error::InvalidABI(ref str) => write!(f, "Invalid ABI: {}", str),
-            Error::InvalidABIToken(ref err) => write!(f, "Invalid ABI Token: {:?}", err),
             Error::InvalidLength(len) => write!(f, "Invalid length: {}", len),
             Error::InvalidHexLength(ref str) => write!(f, "Invalid hex data length: {}", str),
             Error::UnexpectedHexEncoding(ref err) => {

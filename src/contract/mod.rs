@@ -29,7 +29,7 @@ use hex;
 /// Returns specification of contract function given the function name.
 pub fn get_function(contract: &Contract, name: String) -> Option<Function> {
     match contract.function(&name) {
-        Ok(f) => Some(Function::new(f)),
+        Ok(f) => Some(Function::from(f.to_owned())),
         _ => None,
     }
 }
@@ -40,7 +40,7 @@ pub fn serialize_function_call(
     name: String,
     params: Vec<Token>,
 ) -> Result<Vec<u8>, Error> {
-    let f = contract.get_function(name).unwrap();
+    let f = contract.function(&name).unwrap();
     f.encode_call(params).map_err(From::from)
 }
 

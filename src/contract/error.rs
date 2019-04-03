@@ -23,15 +23,13 @@ impl fmt::Display for Error {
 
 impl From<ethabi::Error> for Error {
     fn from(e: ethabi::Error) -> Self {
-        Error::InvalidContract(String::new("ethabi error".to_string() + e.description()))
+        Error::InvalidContract("ethabi error".to_string() + e.description())
     }
 }
 
 impl From<ethabi::ErrorKind> for Error {
     fn from(e: ethabi::ErrorKind) -> Self {
-        Error::InvalidContract(String::new(
-            "ethabi param error".to_string() + e.description(),
-        ))
+        Error::InvalidContract("ethabi param error".to_string() + e.description())
     }
 }
 
