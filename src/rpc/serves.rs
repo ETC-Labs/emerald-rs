@@ -1,7 +1,7 @@
 use super::serialize::RPCTransaction;
 use super::Error;
 use super::StorageController;
-use contract::Contract;
+use contract;
 use core::{Address, Transaction};
 use hdwallet::bip32::to_prefixed_path;
 use hdwallet::WManager;
@@ -584,7 +584,7 @@ pub fn encode_function_call(
 ) -> Result<String, Error> {
     let (_, inputs) = params.into_full();
 
-    Contract::serialize_params(&inputs.types, inputs.values).map_err(From::from)
+    contract::serialize_params(&inputs.types, inputs.values).map_err(From::from)
 }
 
 pub fn list_contracts(
